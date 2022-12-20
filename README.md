@@ -1,6 +1,3 @@
-# Final Greenfoot Project
-This is the README.md file.
+Basic Concept
 
-Consider using **Markdown** syntax to format the text in this file. [Markdown basics](https://www.markdownguide.org/getting-started/)
-
-
+It have totoal of 10 level of the game, something related to shooting.
