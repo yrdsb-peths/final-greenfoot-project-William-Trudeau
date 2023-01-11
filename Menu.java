@@ -16,7 +16,7 @@ public class Menu extends World
     public Menu()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(850, 450, 1); 
+        super(800, 550, 1); 
         StartButton start = new StartButton();
         if (Greenfoot.mouseClicked(start))
         {
