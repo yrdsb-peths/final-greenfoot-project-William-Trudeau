@@ -9,9 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Button extends Actor
 {
     private String name;
-    
-    
-    
+    GifImage logoImage = new GifImage("logo.gif");
     public Button(String name) {
         this.name = name;
     }
@@ -22,6 +20,9 @@ public class Button extends Actor
      */
     public void act()
     {
+        if (this.name == "Logo") {
+            this.setImage(logoImage.getCurrentImage());
+        }    
         if (Greenfoot.mouseClicked(this) && this.name == "StartButton") {
             Greenfoot.setWorld(new Levels());
         }
