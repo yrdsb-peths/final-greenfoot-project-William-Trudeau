@@ -17,10 +17,10 @@ public class Menu extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(800, 550, 1); 
         Button logo = new Button("Logo");
-        addObject(logo, 400, 50);
+        addObject(logo, 400, 85);
         logo.setImage("logo.gif");
         Button start = new Button("StartButton");
-        addObject(start, 200, 200);
+        addObject(start, 400, 220);
         start.setImage("button_start.png"); 
     }
 }
