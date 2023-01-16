@@ -20,13 +20,20 @@ public class Button extends Actor
      */
     public void act()
     {
+        if (Greenfoot.mouseClicked(this)) {
+            switch (this.name) {
+                case "StartButton":
+                    Greenfoot.setWorld(new Levels());
+                case "GuideButton":
+                    Greenfoot.setWorld(new Guide());
+                case "ShopButton":
+                    Greenfoot.setWorld(new Shop());
+            } 
+        }
         if (this.name == "Logo") {
             this.setImage(logoImage.getCurrentImage());
         }    
-        if (Greenfoot.mouseClicked(this) && this.name == "StartButton") {
-            Greenfoot.setWorld(new Levels());
-        }
-        transparent();
+         transparent();
     }    
     /**
      * When mouse moved on to the button, the button will change transparency. That way user can clearly know which button they are on.
