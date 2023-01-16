@@ -47,5 +47,9 @@ public class Button extends Actor
             this.getImage().setTransparency(255);
         }
     }
+    
+    public String getName() {
+        return this.name;
+    }
 }
        
