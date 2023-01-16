@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The buttons class to 
+ * The buttons class to implement different buttons actions.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author William Wang
+ * @version 1.0.0
  */
 public class Button extends Actor
 {
@@ -36,7 +36,8 @@ public class Button extends Actor
          transparent();
     }    
     /**
-     * When mouse moved on to the button, the button will change transparency. That way user can clearly know which button they are on.
+     * When mouse moved on to the button, the button will change transparency.
+     * That way user can easily know which button they are on.
      */    
     private void transparent() {
         if (Greenfoot.mouseMoved(this) && this.name != "Logo") {

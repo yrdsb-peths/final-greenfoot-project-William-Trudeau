@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * GameStart Menu
+ * GameDefault Menu for Player to slected different sub Menu.
  * 
  * @author William Wang
  * @version 1.0.0

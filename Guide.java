@@ -3,8 +3,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Guide here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author William Wang
+ * @version 1.0.0
  */
 public class Guide extends World
 {
