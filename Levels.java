@@ -26,7 +26,8 @@ public class Levels extends World
         for (Button i: levelsButton) {
             addObject(i, 150+width, 100+height);
             i.setImage(i.getName()+".png");
-            width += 50;
+            width += 120;
+            width = Integer.parseInt(i.getName()) == 5 ? 0: width;
             height = Integer.parseInt(i.getName()) >= 5 ? 100 : 0;
         }
 

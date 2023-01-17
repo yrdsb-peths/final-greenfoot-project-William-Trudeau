@@ -20,16 +20,7 @@ public class Button extends Actor
      */
     public void act()
     {
-        if (Greenfoot.mouseClicked(this)) {
-            switch (this.name) {
-                case "StartButton":
-                    Greenfoot.setWorld(new Levels());
-                case "GuideButton":
-                    Greenfoot.setWorld(new Guide());
-                case "ShopButton":
-                    Greenfoot.setWorld(new Shop());
-            } 
-        }
+        buttonClicked();
         if (this.name == "Logo") {
             this.setImage(logoImage.getCurrentImage());
         }    
@@ -45,6 +36,38 @@ public class Button extends Actor
         }
         else if (Greenfoot.mouseMoved(null) && !Greenfoot.mouseMoved(this)) {
             this.getImage().setTransparency(255);
+        }
+    }
+    public void buttonClicked() {
+        if (Greenfoot.mouseClicked(this)) {
+            switch (this.name) {
+                case "StartButton":
+                    Greenfoot.setWorld(new Levels());
+                case "GuideButton":
+                    Greenfoot.setWorld(new Guide());
+                case "ShopButton":
+                    Greenfoot.setWorld(new Shop());
+                case "1":
+                    Greenfoot.setWorld(new Level1());
+                case "2":
+                    Greenfoot.setWorld(new Level2());
+                case "3":
+                    Greenfoot.setWorld(new Level3());
+                case "4":
+                    Greenfoot.setWorld(new Level4());
+                case "5":
+                    Greenfoot.setWorld(new Level5());
+                case "6":
+                    Greenfoot.setWorld(new Level6());
+                case "7":
+                    Greenfoot.setWorld(new Level7());
+                case "8":
+                    Greenfoot.setWorld(new Level8());  
+                case "9":
+                    Greenfoot.setWorld(new Level9());
+                case "10":
+                    Greenfoot.setWorld(new Level10()); 
+            } 
         }
     }
     
