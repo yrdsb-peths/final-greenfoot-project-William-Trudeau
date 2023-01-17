@@ -24,7 +24,7 @@ public class Button extends Actor
         if (this.name == "Logo") {
             this.setImage(logoImage.getCurrentImage());
         }    
-         transparent();
+        transparent();
     }    
     /**
      * When mouse moved on to the button, the button will change transparency.
@@ -43,30 +43,13 @@ public class Button extends Actor
             switch (this.name) {
                 case "StartButton":
                     Greenfoot.setWorld(new Levels());
+                    break;
                 case "GuideButton":
                     Greenfoot.setWorld(new Guide());
+                    break;
                 case "ShopButton":
                     Greenfoot.setWorld(new Shop());
-                case "1":
-                    Greenfoot.setWorld(new Level1());
-                case "2":
-                    Greenfoot.setWorld(new Level2());
-                case "3":
-                    Greenfoot.setWorld(new Level3());
-                case "4":
-                    Greenfoot.setWorld(new Level4());
-                case "5":
-                    Greenfoot.setWorld(new Level5());
-                case "6":
-                    Greenfoot.setWorld(new Level6());
-                case "7":
-                    Greenfoot.setWorld(new Level7());
-                case "8":
-                    Greenfoot.setWorld(new Level8());  
-                case "9":
-                    Greenfoot.setWorld(new Level9());
-                case "10":
-                    Greenfoot.setWorld(new Level10()); 
+                    break;
             } 
         }
     }
