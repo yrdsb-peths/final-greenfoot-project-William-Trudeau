@@ -10,6 +10,7 @@ public class Guide extends World
 {
     int width;
     int height;
+    Button[] levelsButton = new Button[10];
     /**
      * Constructor for objects of class Guide.
      * 
@@ -18,7 +19,6 @@ public class Guide extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(800, 550, 1); 
-        Button[] levelsButton = new Button[10];
         for (int i = 0; i < 10; i++) {
             String str = Integer.toString(i+1);
             levelsButton[i] = new Button(str);

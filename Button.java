@@ -42,7 +42,7 @@ public class Button extends Actor
         if (Greenfoot.mouseClicked(this)) {
             switch (this.name) {
                 case "StartButton":
-                    Greenfoot.setWorld(new Levels());
+                    Greenfoot.setWorld(new Mode());
                     break;
                 case "GuideButton":
                     Greenfoot.setWorld(new Guide());
