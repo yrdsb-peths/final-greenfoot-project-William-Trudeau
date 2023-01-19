@@ -9,9 +9,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Mode extends World
 {
     Button logo = new Button("Logo");
-    Button infiniteSolo = new Button("InfiniteSolo");
-    Button infiniteDouble = new Button("InfiniteDouble");
-    Button infiniteCrazy = new Button("InfiniteCrazy");
+    Button back = new Button("Back");
+    Button infiniteSolo = new Button("Solo");
+    Button infiniteDouble = new Button("Double");
+    Button infiniteCrazy = new Button("Crazy");
     /**
      * Constructor for objects of class Levels.
      * 
@@ -21,6 +22,8 @@ public class Mode extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(800, 550, 1); 
         addObject(logo, 400, 100);
+        addObject(back, 68, 28);
+        back.setImage("button_back.png");
         addObject(infiniteSolo, 400, 250);
         infiniteSolo.setImage("button_infinite-solo.png");
         addObject(infiniteDouble, 400, 350);

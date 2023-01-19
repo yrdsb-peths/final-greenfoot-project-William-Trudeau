@@ -8,7 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Shop extends World
 {
-
+    static String SKIN = "default";
+    static String SKILL = "shield";
     /**
      * Constructor for objects of class Shop.
      * 
