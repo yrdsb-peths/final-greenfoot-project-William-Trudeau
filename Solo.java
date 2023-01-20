@@ -14,11 +14,11 @@ public class Solo extends World
      * Constructor for objects of class Game.
      * 
      */
-    public Solo(String skin, String skill)
+    public Solo()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(800, 550, 1); 
-        Player player = new Player(skin, skill);
+        Player player = new Player(Shop.SKIN, Shop.SKILL, 1);
         addObject(player, 400, 225);
     }
     

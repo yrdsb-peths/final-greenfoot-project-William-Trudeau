@@ -10,6 +10,8 @@ public class Button extends Actor
 {
     private String name;
     GifImage logoImage = new GifImage("logo.gif");
+    Shop shop = (Shop)getWorld();
+    SimpleTimer timer = new SimpleTimer();
     public Button(String name) {
         this.name = name;
     }
@@ -54,13 +56,39 @@ public class Button extends Actor
                 case "ShopButton":
                     Greenfoot.setWorld(new Shop());
                     break;
-                case "Solo":
-                    Greenfoot.setWorld(new Solo("fas", "dawd"));
+                case "Back":
+                    Greenfoot.setWorld(new Menu());
                     break;
-                    
-            } 
+                case "Solo":
+                    Greenfoot.setWorld(new Solo());
+                    break;
+                case "Default":
+                    if (!Shop.SKIN.equals("Default")) {
+                        shop.ppl1Label.setValue("Selected");
+                        Shop.SKIN = "Default";
+                    } 
+                    break;
+                case "Baby": 
+                    if (!Shop.SKIN.equals("Baby") && Shop.UNLOCK[2]) {
+                        shop.baby1Label.setValue("Selected");
+                        Shop.SKIN = "Baby";
+                    }
+                    else {
+                        if (Shop.MONEY >= 100){
+                            Shop.MONEY -= 100;
+                            Shop.UNLOCK[2] = true;
+                            shop.baby1Label.setValue("Available");
+                        }
+                        else {
+                            shop.addObject(shop.noMoney, 400, 225);
+                            Greenfoot.delay(2);
+                            shop.removeObject(shop.noMoney);
+                        }
+                    }
+                    break;
+            }
         }
-    }
+    }    
     public String getName() {
         return this.name;
     }

@@ -15,6 +15,6 @@ public class Double extends Solo
      */
     public Double()
     {
-        super("xx", "xx");
+        super();
     }
 }

@@ -10,7 +10,8 @@ public class Player extends Actor
 {
     int speed = 1;
     int score = 1;
-    public Player(String Skin,String skill) {
+    int player = 1;
+    public Player(String Skin,String skill, int player) {
         
     }
     /**
@@ -23,17 +24,33 @@ public class Player extends Actor
         doSkin();
     }
     private void control() {
-        if(Greenfoot.isKeyDown("w")) {
-            setLocation(getX(),getY()-(3*speed));
+        if (this.player == 1) {
+            if(Greenfoot.isKeyDown("w")) {
+                setLocation(getX(),getY()-(3*speed));
+            }
+            else if (Greenfoot.isKeyDown("a")) {
+                setLocation(getX()-(3*speed),getY());
+            }
+            else if (Greenfoot.isKeyDown("s")) {
+                setLocation(getX(),getY()+(3*speed));
+            }
+            else if (Greenfoot.isKeyDown("d")) {
+                setLocation(getX()+(3*speed),getY());
+            }
         }
-        else if (Greenfoot.isKeyDown("a")) {
-            setLocation(getX()-(3*speed),getY());
-        }
-        else if (Greenfoot.isKeyDown("s")) {
-            setLocation(getX(),getY()+(3*speed));
-        }
-        else if (Greenfoot.isKeyDown("d")) {
-            setLocation(getX()+(3*speed),getY());
+        else {
+            if(Greenfoot.isKeyDown("up")) {
+                setLocation(getX(),getY()-(3*speed));
+            }
+            else if (Greenfoot.isKeyDown("left")) {
+                setLocation(getX()-(3*speed),getY());
+            }
+            else if (Greenfoot.isKeyDown("down")) {
+                setLocation(getX(),getY()+(3*speed));
+            }
+            else if (Greenfoot.isKeyDown("right")) {
+                setLocation(getX()+(3*speed),getY());
+            }
         }
     }
     private void doSkin() {
