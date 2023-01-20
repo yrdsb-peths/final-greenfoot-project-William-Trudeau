@@ -50,6 +50,10 @@ public class Shop extends World
         setShop();
         setStatus();
     }
+    public void act() {
+        useSkin.setValue("Skin: "+SKIN);
+        useSkill.setValue("Skill: "+SKILL);
+    }
     private void setMenu() {
         addObject(back, 68, 28);
         back.setImage("button_back.png");  

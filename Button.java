@@ -10,7 +10,6 @@ public class Button extends Actor
 {
     private String name;
     GifImage logoImage = new GifImage("logo.gif");
-    Shop shop = (Shop)getWorld();
     SimpleTimer timer = new SimpleTimer();
     public Button(String name) {
         this.name = name;
@@ -22,7 +21,8 @@ public class Button extends Actor
      */
     public void act()
     {
-        buttonClicked();
+        Shop shop = (Shop) getWorld();
+        buttonClicked(shop);
         if (this.name.equals("Logo")) {
             this.setImage(logoImage.getCurrentImage());
         }    
@@ -44,7 +44,7 @@ public class Button extends Actor
             this.getImage().setTransparency(255);
         }
     }
-    public void buttonClicked() {
+    public void buttonClicked(Shop shop) {
         if (Greenfoot.mouseClicked(this)) {
             switch (this.name) {
                 case "StartButton":
@@ -64,31 +64,87 @@ public class Button extends Actor
                     break;
                 case "Default":
                     if (!Shop.SKIN.equals("Default")) {
+                        status(shop);
                         shop.ppl1Label.setValue("Selected");
                         Shop.SKIN = "Default";
                     } 
                     break;
                 case "Baby": 
-                    if (!Shop.SKIN.equals("Baby") && Shop.UNLOCK[2]) {
+                    if (!Shop.SKIN.equals("Baby") && Shop.UNLOCK[1]) {
+                        status(shop);
                         shop.baby1Label.setValue("Selected");
                         Shop.SKIN = "Baby";
                     }
-                    else {
+                    else if (!Shop.UNLOCK[2]){
                         if (Shop.MONEY >= 100){
                             Shop.MONEY -= 100;
-                            Shop.UNLOCK[2] = true;
+                            Shop.UNLOCK[1] = true;
+                            status(shop);
                             shop.baby1Label.setValue("Available");
                         }
                         else {
-                            shop.addObject(shop.noMoney, 400, 225);
-                            Greenfoot.delay(2);
+                            shop.addObject(shop.noMoney, 400, 235);
+                            Greenfoot.delay(20);
                             shop.removeObject(shop.noMoney);
                         }
                     }
+                case "Guy":
+                    if (!Shop.SKIN.equals("Guy") && Shop.UNLOCK[2]) {
+                        status(shop);
+                        shop.baby1Label.setValue("Selected");
+                        Shop.SKIN = "Baby";
+                    }
+                    else if (!Shop.UNLOCK[2]){
+                        if (Shop.MONEY >= 265){
+                            Shop.MONEY -= 265;
+                            Shop.UNLOCK[2] = true;
+                            status(shop);
+                            shop.guy1Label.setValue("Available");
+                        }
+                        else {
+                            shop.addObject(shop.noMoney, 400, 235);
+                            Greenfoot.delay(20);
+                            shop.removeObject(shop.noMoney);
+                        }
+                    }
+                case "Boy":
+                    if (!Shop.SKIN.equals("Boy") && Shop.UNLOCK[3]) {
+                        status(shop);
+                        shop.boy1Label.setValue("Selected");
+                        Shop.SKIN = "Boy";
+                    }
+                    else if (!Shop.UNLOCK[3]){
+                        if (Shop.MONEY >= 599){
+                            Shop.MONEY -= 599;
+                            Shop.UNLOCK[2] = true;
+                            status(shop);
+                            shop.boy1Label.setValue("Available");
+                        }
+                        else {
+                            shop.addObject(shop.noMoney, 400, 235);
+                            Greenfoot.delay(20);
+                            shop.removeObject(shop.noMoney);
+                        }
+                    }
+                    
                     break;
             }
         }
     }    
+    private void status(Shop shop) {
+        if (Shop.UNLOCK[0] == true) {
+            shop.ppl1Label.setValue("Available");
+        }
+        if (Shop.UNLOCK[1] == true) {
+            shop.baby1Label.setValue("Available");
+        }
+        if (Shop.UNLOCK[2] == true) {
+            shop.guy1Label.setValue("Available");
+        }
+        if (Shop.UNLOCK[3] == true) {
+            shop.boy1Label.setValue("Available");
+        }
+    }
     public String getName() {
         return this.name;
     }
