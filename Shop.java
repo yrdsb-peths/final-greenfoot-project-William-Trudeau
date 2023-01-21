@@ -8,18 +8,18 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Shop extends World
 {
-    static int MONEY = 1000;
+    static int MONEY = 10000;
     static String SKIN = "Default";
-    static String SKILL = "Shield";
-    static Boolean[] UNLOCK = {true, false, false, false};
+    static String SKILL = "Speed";
+    static boolean[] UNLOCK = {true, false, false, false};
     
     Label ppl1Label = new Label("Selected", 20);
-    Label baby1Label;
+    Label baby1Label = new Label("Price: 100", 20);
     Label guy1Label = new Label("Price: 265", 20);
     Label boy1Label = new Label("Price: 599", 20);
     
     Button back = new Button("Back");
-    Button box = new Button("null");
+    Button box = new Button("null"); 
     Button shop = new Button("null");
     
     Button ppl1 = new Button("Default");
@@ -30,6 +30,7 @@ public class Shop extends World
     Label useSkin = new Label("Skin: "+SKIN, 40);
     Label useSkill = new Label("Skill: "+SKILL, 40);
     Label noMoney = new Label("Not Enough Money", 80);
+    Label money = new Label("$"+MONEY, 40);
     
     Button sheild = new Button("Sheild");
     Button speed = new Button("Speed");
@@ -53,6 +54,7 @@ public class Shop extends World
     public void act() {
         useSkin.setValue("Skin: "+SKIN);
         useSkill.setValue("Skill: "+SKILL);
+        money.setValue("$"+MONEY);
     }
     private void setMenu() {
         addObject(back, 68, 28);
@@ -88,7 +90,6 @@ public class Shop extends World
         score.setImage(scoreImage);
     }
     private void setStatus() {
-        baby1Label = new Label("Price: 100", 20);
         addObject(ppl1Label, 100, 275); 
         addObject(baby1Label, 300, 275);
         addObject(guy1Label, 500, 275);
@@ -100,5 +101,6 @@ public class Shop extends World
         
         addObject(useSkin, 300, 480);
         addObject(useSkill, 500, 480);
+        addObject(money, 720, 25);
     }
 }

@@ -10,7 +10,7 @@ public class Button extends Actor
 {
     private String name;
     GifImage logoImage = new GifImage("logo.gif");
-    SimpleTimer timer = new SimpleTimer();
+    Shop shop;
     public Button(String name) {
         this.name = name;
     }
@@ -21,8 +21,7 @@ public class Button extends Actor
      */
     public void act()
     {
-        Shop shop = (Shop) getWorld();
-        buttonClicked(shop);
+        buttonClicked();
         if (this.name.equals("Logo")) {
             this.setImage(logoImage.getCurrentImage());
         }    
@@ -44,8 +43,11 @@ public class Button extends Actor
             this.getImage().setTransparency(255);
         }
     }
-    public void buttonClicked(Shop shop) {
+    public void buttonClicked() {
         if (Greenfoot.mouseClicked(this)) {
+            if (getWorld() instanceof Shop) {
+                shop = (Shop) getWorld();
+            }    
             switch (this.name) {
                 case "StartButton":
                     Greenfoot.setWorld(new Mode());
@@ -64,14 +66,14 @@ public class Button extends Actor
                     break;
                 case "Default":
                     if (!Shop.SKIN.equals("Default")) {
-                        status(shop);
+                        skinStatus(shop);
                         shop.ppl1Label.setValue("Selected");
                         Shop.SKIN = "Default";
                     } 
                     break;
                 case "Baby": 
                     if (!Shop.SKIN.equals("Baby") && Shop.UNLOCK[1]) {
-                        status(shop);
+                        skinStatus(shop);
                         shop.baby1Label.setValue("Selected");
                         Shop.SKIN = "Baby";
                     }
@@ -79,7 +81,6 @@ public class Button extends Actor
                         if (Shop.MONEY >= 100){
                             Shop.MONEY -= 100;
                             Shop.UNLOCK[1] = true;
-                            status(shop);
                             shop.baby1Label.setValue("Available");
                         }
                         else {
@@ -88,17 +89,17 @@ public class Button extends Actor
                             shop.removeObject(shop.noMoney);
                         }
                     }
+                    break;
                 case "Guy":
                     if (!Shop.SKIN.equals("Guy") && Shop.UNLOCK[2]) {
-                        status(shop);
-                        shop.baby1Label.setValue("Selected");
-                        Shop.SKIN = "Baby";
+                        skinStatus(shop);
+                        shop.guy1Label.setValue("Selected");
+                        Shop.SKIN = "Guy";
                     }
                     else if (!Shop.UNLOCK[2]){
                         if (Shop.MONEY >= 265){
                             Shop.MONEY -= 265;
                             Shop.UNLOCK[2] = true;
-                            status(shop);
                             shop.guy1Label.setValue("Available");
                         }
                         else {
@@ -107,17 +108,17 @@ public class Button extends Actor
                             shop.removeObject(shop.noMoney);
                         }
                     }
+                    break;
                 case "Boy":
                     if (!Shop.SKIN.equals("Boy") && Shop.UNLOCK[3]) {
-                        status(shop);
+                        skinStatus(shop);
                         shop.boy1Label.setValue("Selected");
                         Shop.SKIN = "Boy";
                     }
                     else if (!Shop.UNLOCK[3]){
                         if (Shop.MONEY >= 599){
                             Shop.MONEY -= 599;
-                            Shop.UNLOCK[2] = true;
-                            status(shop);
+                            Shop.UNLOCK[3] = true;
                             shop.boy1Label.setValue("Available");
                         }
                         else {
@@ -126,24 +127,43 @@ public class Button extends Actor
                             shop.removeObject(shop.noMoney);
                         }
                     }
-                    
+                    break;
+                case "Sheild":
+                    skillStatus(shop);
+                    shop.sheildLabel.setValue("Selected"); 
+                    Shop.SKILL = "Sheild";
+                    break;
+                case "Speed":
+                    skillStatus(shop);
+                    shop.speedLabel.setValue("Selected");
+                    Shop.SKILL = "Speed";
+                    break;
+                case "Score":
+                    skillStatus(shop);
+                    shop.scoreLabel.setValue("Selected");
+                    Shop.SKILL = "Score";
                     break;
             }
         }
     }    
-    private void status(Shop shop) {
-        if (Shop.UNLOCK[0] == true) {
+    private void skinStatus(Shop shop) {
+        if (Shop.UNLOCK[0]) {
             shop.ppl1Label.setValue("Available");
         }
-        if (Shop.UNLOCK[1] == true) {
+        if (Shop.UNLOCK[1]) {
             shop.baby1Label.setValue("Available");
         }
-        if (Shop.UNLOCK[2] == true) {
+        if (Shop.UNLOCK[2]) {
             shop.guy1Label.setValue("Available");
         }
-        if (Shop.UNLOCK[3] == true) {
+        if (Shop.UNLOCK[3]) {
             shop.boy1Label.setValue("Available");
         }
+    }
+    private void skillStatus(Shop shop) {
+        shop.sheildLabel.setValue("Available");
+        shop.speedLabel.setValue("Available");
+        shop.scoreLabel.setValue("Available");
     }
     public String getName() {
         return this.name;

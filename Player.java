@@ -9,10 +9,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Player extends Actor
 {
     int speed = 1;
-    int score = 1;
+    double score = 1;
     int player = 1;
-    public Player(String Skin,String skill, int player) {
-        
+    String skill;
+    String skin;
+    boolean isUse = false;
+    boolean sheild = false;
+    SimpleTimer cd = new SimpleTimer();
+    SimpleTimer timer = new SimpleTimer();
+    public Player(String Skin, String skill, int player) {
+        this.skill = skill;
+        this.skin = skin;
+        this.player = player;
+        cd.mark();
     }
     /**
      * Act - do whatever the Player wants to do. This method is called whenever
@@ -22,6 +31,7 @@ public class Player extends Actor
     {
         control();
         doSkin();
+        check();
     }
     private void control() {
         if (this.player == 1) {
@@ -37,6 +47,9 @@ public class Player extends Actor
             else if (Greenfoot.isKeyDown("d")) {
                 setLocation(getX()+(3*speed),getY());
             }
+            else if (Greenfoot.isKeyDown("f")) {
+                skill();
+            }
         }
         else {
             if(Greenfoot.isKeyDown("up")) {
@@ -51,10 +64,56 @@ public class Player extends Actor
             else if (Greenfoot.isKeyDown("right")) {
                 setLocation(getX()+(3*speed),getY());
             }
+            else if (Greenfoot.isKeyDown("f")) {
+                skill();
+            }
         }
     }
+    private void skill() {
+        switch (this.skill) {
+            case "Sheild":
+                if (cd.millisElapsed() > 8000) {
+                    sheild = true;
+                    timer.mark();
+                }
+                break;
+            case "Speed":
+                if (cd.millisElapsed() > 6000) {
+                    speed = 10;
+                    cd.millisElapsed();
+                    timer.mark();
+                    isUse = true;
+                }
+                break;
+            case "Score":
+                score = 1.5;
+                timer.mark();
+                break;
+            
+        }
+    }
+    private void check() {
+        switch (this.skill) {
+            case "Sheild":
+                if (timer.millisElapsed() > 3000 && isUse) {
+                    sheild = false;
+                    cd.millisElapsed();
+                    timer.mark();
+                    isUse = false;
+                }
+                break;
+            case "Speed":
+                if (timer.millisElapsed() > 2000 && isUse) {
+                    speed = 1;
+                    cd.millisElapsed();
+                    timer.mark();
+                    isUse = false;
+                }
+                break;
+            }    
+    }
     private void doSkin() {
-        switch (Menu.SKIN) {
+        switch (Shop.SKIN) {
             case "default":
                 break;
             case "default2":

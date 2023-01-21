@@ -8,8 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Menu extends World
 {
-    public static String SKIN = "baby";
-    public static String SKILL = "Sheild";
     /**
      * Constructor for objects of class Menu.
      * 

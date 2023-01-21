@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Solo extends World
 {
     int level;
+    Label cd = new Label("CD:", 20 );
     
     /**
      * Constructor for objects of class Game.
@@ -20,6 +21,7 @@ public class Solo extends World
         super(800, 550, 1); 
         Player player = new Player(Shop.SKIN, Shop.SKILL, 1);
         addObject(player, 400, 225);
+        
     }
     
 }
