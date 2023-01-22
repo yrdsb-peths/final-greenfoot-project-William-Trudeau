@@ -23,5 +23,25 @@ public class Solo extends World
         addObject(player, 400, 225);
         
     }
-    
+    public void timeScore() {
+        
+    }
+    public void createFireball() {
+        
+    }
+    public void createArrow() {
+        
+    }
+    public void createBomb() {
+        
+    }
+    public void createBanana() {
+        
+    }
+    public void createHamburger() {
+        
+    }
+    public void gameOver() {
+        
+    }
 }

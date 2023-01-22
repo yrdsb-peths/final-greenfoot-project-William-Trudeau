@@ -15,13 +15,17 @@ public class Player extends Actor
     String skin;
     boolean isUse = false;
     boolean sheild = false;
+    boolean firstTime = true;
     SimpleTimer cd = new SimpleTimer();
     SimpleTimer timer = new SimpleTimer();
-    public Player(String Skin, String skill, int player) {
+    public Player(String skin, String skill, int player) {
         this.skill = skill;
         this.skin = skin;
         this.player = player;
-        cd.mark();
+        if (skill.equals("Score")) {
+            this.score = 1.5;
+        }
+        doSkin();
     }
     /**
      * Act - do whatever the Player wants to do. This method is called whenever
@@ -30,7 +34,6 @@ public class Player extends Actor
     public void act()
     {
         control();
-        doSkin();
         check();
     }
     private void control() {
@@ -72,24 +75,40 @@ public class Player extends Actor
     private void skill() {
         switch (this.skill) {
             case "Sheild":
-                if (cd.millisElapsed() > 8000) {
+                if (cd.millisElapsed() > 8000 && !isUse) {
                     sheild = true;
                     timer.mark();
+                    GreenfootImage sheildImage = new GreenfootImage("sheild.png");
+                    sheildImage.scale(72, 72);
+                    this.setImage(sheildImage);
+                }
+                else if (firstTime) {
+                    sheild = true;
+                    timer.mark();
+                    isUse = true;
+                    GreenfootImage sheildImage = new GreenfootImage("sheild.png");
+                    sheildImage.scale(72, 72);
+                    this.setImage(sheildImage);
                 }
                 break;
             case "Speed":
-                if (cd.millisElapsed() > 6000) {
-                    speed = 10;
-                    cd.millisElapsed();
+                if (cd.millisElapsed() > 6000 && !isUse) {
+                    speed = 3;
                     timer.mark();
                     isUse = true;
+                    GreenfootImage speedImage = new GreenfootImage("speed.png");
+                    speedImage.scale(100, 100);
+                    this.setImage(speedImage);
+                }
+                else if (firstTime) {
+                    speed = 3;
+                    timer.mark();
+                    isUse = true;
+                    GreenfootImage speedImage = new GreenfootImage("speed.png");
+                    speedImage.scale(80, 80);
+                    this.setImage(speedImage);
                 }
                 break;
-            case "Score":
-                score = 1.5;
-                timer.mark();
-                break;
-            
         }
     }
     private void check() {
@@ -97,48 +116,53 @@ public class Player extends Actor
             case "Sheild":
                 if (timer.millisElapsed() > 3000 && isUse) {
                     sheild = false;
-                    cd.millisElapsed();
-                    timer.mark();
+                    cd.mark();
                     isUse = false;
+                    doSkin();
                 }
                 break;
             case "Speed":
                 if (timer.millisElapsed() > 2000 && isUse) {
                     speed = 1;
-                    cd.millisElapsed();
-                    timer.mark();
+                    cd.mark();
                     isUse = false;
+                    doSkin();
                 }
                 break;
             }    
     }
     private void doSkin() {
-        switch (Shop.SKIN) {
-            case "default":
-                break;
-            case "default2":
-                this.setImage("ppl2.png");
-            case "baby1":
-                this.setImage("baby1.png");
-                break;
-            case "baby2":
-                this.setImage("baby2.png");
-                break;
-            case "guy1":
-                this.setImage("guy1.png");
-                break;
-            case "guy2":
-                this.setImage("guy2.png");
-                break;
-            case "boy1":
-                this.setImage("boy1.png");
-                break;
-            case "boy2":
-                this.setImage("boy2.png");
-                break;
+        if (this.player == 1) {
+            switch (this.skin) {
+                case "Default":
+                    this.setImage("ppl1.png");
+                    break;
+                case "Baby":
+                    this.setImage("baby1.png");
+                    break;
+                case "Guy":                        
+                    this.setImage("guy1.png");
+                    break;
+                case "Boy":
+                    this.setImage("boy1.png");
+                    break;
+            }
         }
-    }
-    private void doSkill() {
-        
+        else if (this.player == 2){
+            switch (this.skin) {
+                case "Default":
+                    this.setImage("ppl2.png");
+                    break;
+                case "Baby":
+                    this.setImage("baby2.png");
+                    break;
+                case "Guy":                        
+                    this.setImage("guy2.png");
+                    break;
+                case "Boy":
+                    this.setImage("boy2.png");
+                    break;
+            }
+        }
     }
 }
