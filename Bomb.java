@@ -8,12 +8,42 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Bomb extends Actor
 {
+    static int speed = 1;
+    int side;
+    SimpleTimer timer = new SimpleTimer();
+    public Bomb(int level, int side) {
+        this.side = side;
+        timer.mark();
+    }
     /**
-     * Act - do whatever the Bomb wants to do. This method is called whenever
+     * Act - do whatever the Fireball wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
-        // Add your action code here.
+        int x = getX();
+        int y = getY();
+        if (side == 0 && timer.millisElapsed() > 10) {
+            setLocation(x+speed, y);
+            timer.mark();
+        }
+        else if (side == 1 && timer.millisElapsed() > 10) {
+            setLocation(x-speed, y);
+            timer.mark();
+        }
+        else if (side == 2 && timer.millisElapsed() > 10) {
+            setLocation(x, y+speed);
+            timer.mark();
+        }
+        else if (side == 3 && timer.millisElapsed() > 10) {
+            setLocation(x, y-speed);
+            timer.mark();
+        }
+        if(getY() >= 545 || getY() <= 5 || getX() >= 795 || getX() <= 5 ) {
+            getWorld().removeObject(this);
+        }
+    }
+    public static void level(int level) {
+        speed = level % 3 == 0 ? speed + 1: speed;
     }
 }

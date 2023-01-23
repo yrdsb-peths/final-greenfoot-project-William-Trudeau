@@ -8,12 +8,22 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Banana extends Actor
 {
+    static int score = 10000;
+    SimpleTimer timer = new SimpleTimer();
+    public Banana() {
+        timer.mark();
+    }
     /**
-     * Act - do whatever the Banana wants to do. This method is called whenever
+     * Act - do whatever the Hamburger wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
-        // Add your action code here.
+        if(timer.millisElapsed() > 1500) {
+            getWorld().removeObject(this);
+        }
+    }
+    public void level(int level) {
+        score += 100;
     }
 }

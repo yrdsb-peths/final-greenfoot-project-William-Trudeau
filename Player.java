@@ -35,6 +35,63 @@ public class Player extends Actor
     {
         control();
         check();
+        touch();
+    }
+    public void touch() {
+        if(isTouching(Fireball.class))
+        {
+            if (getWorld() instanceof Solo) {
+                ((Solo)getWorld()).gameOver();
+            }
+            else if (getWorld() instanceof Double) {
+                ((Double)getWorld()).gameOver();
+            }
+            getWorld().removeObject(this);
+            return;
+        }
+        if(isTouching(Arrow.class))
+        {
+            if (getWorld() instanceof Solo) {
+                ((Solo)getWorld()).gameOver();
+            }
+            else if (getWorld() instanceof Double) {
+                ((Double)getWorld()).gameOver();
+            }
+            getWorld().removeObject(this);
+            return;
+        }
+        if(isTouching(Bomb.class))
+        {
+            if (getWorld() instanceof Solo) {
+                ((Solo)getWorld()).gameOver();
+            }
+            else if (getWorld() instanceof Double) {
+                ((Double)getWorld()).gameOver();
+            }
+            getWorld().removeObject(this);
+            return;
+        }
+        if(isTouching(Banana.class))
+        {
+            removeTouching(Banana.class);
+            if (getWorld() instanceof Solo) {
+                ((Solo)getWorld()).score += Banana.score;
+            }
+            else if (getWorld() instanceof Double) {
+                ((Double)getWorld()).gameOver();
+                
+            }
+        }
+        if(isTouching(Hamburger.class))
+        {
+            removeTouching(Hamburger.class);
+            if (getWorld() instanceof Solo) {
+                ((Solo)getWorld()).gameOver();
+            }
+            else if (getWorld() instanceof Double) {
+                ((Double)getWorld()).gameOver();
+            }
+        }
     }
     private void control() {
         if (this.player == 1) {

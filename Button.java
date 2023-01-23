@@ -143,6 +143,14 @@ public class Button extends Actor
                     shop.scoreLabel.setValue("Selected");
                     Shop.SKILL = "Score";
                     break;
+                case "Again":
+                    Greenfoot.setWorld(new Solo());
+                    break;
+                case "BackMode":
+                    Greenfoot.setWorld(new Mode());
+                    break;
+                case "AgainDouble":
+                    Greenfoot.setWorld(new PlayerSelect());
             }
         }
     }    
