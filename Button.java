@@ -9,8 +9,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Button extends Actor
 {
     private String name;
-    GifImage logoImage = new GifImage("logo.gif");
     Shop shop;
+    Guide guide;
+    GifImage logoImage = new GifImage("logo.gif");
     GreenfootSound clickSound = new GreenfootSound("click.wav");
     public Button(String name) {
         this.name = name;
@@ -26,10 +27,7 @@ public class Button extends Actor
         if (this.name.equals("Logo")) {
             this.setImage(logoImage.getCurrentImage());
         }    
-        if (Greenfoot.mouseMoved(this) && this.name.equals("1"))
-        {
-            getWorld().addObject(((Guide)getWorld()).level1, 400, 250);
-        }
+        buttonMoved();
         transparent();
     }    
     /**
@@ -42,6 +40,23 @@ public class Button extends Actor
         }
         else if (Greenfoot.mouseMoved(null) && !Greenfoot.mouseMoved(this)) {
             this.getImage().setTransparency(255);
+        }
+    }
+    public void buttonMoved() {
+        if (Greenfoot.mouseMoved(this)&& !this.name.equals("Logo") && !this.name.equals("null")) {
+            switch (this.name) {
+                case "1":
+                    getWorld().addObject(((Guide)getWorld()).level1, 400, 250);
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                case "10":
+            }
         }
     }
     public void buttonClicked() {
@@ -62,6 +77,9 @@ public class Button extends Actor
                     Greenfoot.setWorld(new Shop());
                     break;
                 case "Back":
+                    if (getWorld() instanceof Mode) {
+                        ((Mode)getWorld()).background.stop();
+                    }
                     Greenfoot.setWorld(new Menu());
                     break;
                 case "Solo":
@@ -174,7 +192,7 @@ public class Button extends Actor
             }
         }
     }    
-    private void skinStatus(Shop shop) {
+    public void skinStatus(Shop shop) {
         if (Shop.UNLOCK[0]) {
             shop.ppl1Label.setValue("Available");
         }
@@ -188,10 +206,13 @@ public class Button extends Actor
             shop.boy1Label.setValue("Available");
         }
     }
-    private void skillStatus(Shop shop) {
+    public void skillStatus(Shop shop) {
         shop.sheildLabel.setValue("Available");
         shop.speedLabel.setValue("Available");
         shop.scoreLabel.setValue("Available");
+    }
+    public void guideClean(Guide guide){
+        
     }
     public String getName() {
         return this.name;
