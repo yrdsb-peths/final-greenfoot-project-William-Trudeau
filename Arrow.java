@@ -30,6 +30,6 @@ public class Arrow extends Actor
         }
     }
     public static void level(int level) {
-        speed = level % 10 == 0 ? speed+1: speed;
+        speed = (level/10)*1+1;
     }
 }

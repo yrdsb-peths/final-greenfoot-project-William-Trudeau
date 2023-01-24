@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Banana extends Actor
 {
-    static int score = 10000;
+    static int score = 500;
     SimpleTimer timer = new SimpleTimer();
     public Banana() {
         timer.mark();
@@ -24,6 +24,6 @@ public class Banana extends Actor
         }
     }
     public void level(int level) {
-        score += 100;
+        score = (level/2)*100+500; 
     }
 }

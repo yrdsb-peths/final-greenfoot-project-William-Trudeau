@@ -9,7 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Player extends Actor
 {
     int speed = 1;
-    double score = 1;
+    int score = 0;
+    int multi = 1;
     int player = 1;
     String skill;
     String skin;
@@ -23,7 +24,7 @@ public class Player extends Actor
         this.skin = skin;
         this.player = player;
         if (skill.equals("Score")) {
-            this.score = 1.5;
+            this.score = 2;
         }
         doSkin();
     }
@@ -62,35 +63,18 @@ public class Player extends Actor
         }
         if(isTouching(Bomb.class))
         {
-            if (getWorld() instanceof Solo) {
-                ((Solo)getWorld()).gameOver();
-            }
-            else if (getWorld() instanceof Double) {
-                ((Double)getWorld()).gameOver();
-            }
-            getWorld().removeObject(this);
-            return;
+            removeTouching(Bomb.class);
+            this.score -= Bomb.score;
         }
         if(isTouching(Banana.class))
         {
             removeTouching(Banana.class);
-            if (getWorld() instanceof Solo) {
-                ((Solo)getWorld()).score += Banana.score;
-            }
-            else if (getWorld() instanceof Double) {
-                ((Double)getWorld()).gameOver();
-                
-            }
+            this.score += Banana.score*multi;
         }
         if(isTouching(Hamburger.class))
         {
             removeTouching(Hamburger.class);
-            if (getWorld() instanceof Solo) {
-                ((Solo)getWorld()).gameOver();
-            }
-            else if (getWorld() instanceof Double) {
-                ((Double)getWorld()).gameOver();
-            }
+            this.score += Hamburger.score*multi;
         }
     }
     private void control() {

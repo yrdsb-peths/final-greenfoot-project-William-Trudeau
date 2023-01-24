@@ -9,11 +9,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Solo extends World
 {
     int level = 1;
-    int score = 0;
+    Player player = new Player(Shop.SKIN, Shop.SKILL, 1);
     Label showLevel = new Label("Level: "+ level, 36  );
     Label cd = new Label("CD:", 20 );
-    Label showScore = new Label("Score: " + score, 35);
-    Player player = new Player(Shop.SKIN, Shop.SKILL, 1);
+    Label showScore = new Label("Score: " + player.score, 35);
+    Label gameOver = new Label("GAMEOVER", 100);
+    boolean isGameOver = false;
     SimpleTimer timerFireball = new SimpleTimer();
     SimpleTimer timerArrow = new SimpleTimer();
     SimpleTimer timerBomb = new SimpleTimer();
@@ -22,7 +23,6 @@ public class Solo extends World
     SimpleTimer timer = new SimpleTimer();
     Button again = new Button("Again");
     Button back = new Button("BackMode");
-    
     /**
      * Constructor for objects of class Game.
      * 
@@ -42,33 +42,35 @@ public class Solo extends World
         timerHamburger.mark();
     }
     public void act() {
-        if (timerFireball.millisElapsed() > 5000-(level*10)) {
-            createFireball();
-            timerFireball.mark();
-        }
-        if (timerArrow.millisElapsed() > 6500) {
-            createArrow();
-            timerArrow.mark();
-        }
-        if (timerBomb.millisElapsed() > 10000) {
-            createBomb();
-            timerBomb.mark();
-        }
-        if (timerBanana.millisElapsed() > 3500) {
-            createBanana();
-            timerBanana.mark();
-        }
-        if (timerHamburger.millisElapsed() > 8000) {
-            createHamburger();
-            timerHamburger.mark();
-        }
-        timeScore();
-        levelUp();
+        if (!isGameOver) {
+            if (timerFireball.millisElapsed() > 5000-(level*10)) {
+                createFireball();
+                timerFireball.mark();
+            }
+            if (timerArrow.millisElapsed() > 6500) {
+                createArrow();
+                timerArrow.mark();
+            }
+            if (timerBomb.millisElapsed() > 10000) {
+                createBomb();
+                timerBomb.mark();
+            }
+            if (timerBanana.millisElapsed() > 3500) {
+                createBanana();
+                timerBanana.mark();
+            }
+            if (timerHamburger.millisElapsed() > 8000) {
+                createHamburger();
+                timerHamburger.mark();
+            }
+            timeScore();
+            levelUp();
+        }    
     }
     public void timeScore() {
         if (timer.millisElapsed() > 10) {
-            score += 6;
-            showScore.setValue("Score: " + score);
+            player.score += 6;
+            showScore.setValue("Score: " + player.score);
             timer.mark();
         }
     }
@@ -96,7 +98,7 @@ public class Solo extends World
             Arrow arrow = new Arrow(level);
             int x = Greenfoot.getRandomNumber(800);
             GreenfootImage image = new GreenfootImage("arrow.png");
-            image.scale(80, 80);
+            image.scale(70, 70);
             arrow.setImage(image);
             addObject(arrow, x, 0);
         }    
@@ -147,15 +149,18 @@ public class Solo extends World
         addObject(hamburger, x, y);  
     }
     public void levelUp() {
-        if (level*1500 < score-1500) {
-            level += 1;
-            showLevel.setValue("Level: "+level);
-            Fireball.level(level);
-            Arrow.level(level);
-            Bomb.level(level);
-        }
+        level = player.score/1500+1;
+        showLevel.setValue("Level: "+level);
+        Fireball.level(level);
+        Arrow.level(level);
+        Bomb.level(level);
     }
     public void gameOver() {
-        
+        isGameOver = true;
+        back.setImage("back.png");
+        again.setImage("again.png");
+        addObject(gameOver, 400, 220);
+        addObject(back, 300, 320);
+        addObject(again, 500, 320);
     }
 }

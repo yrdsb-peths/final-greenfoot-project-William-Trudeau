@@ -146,11 +146,12 @@ public class Button extends Actor
                 case "Again":
                     Greenfoot.setWorld(new Solo());
                     break;
+                case "AgainDouble":
+                    Greenfoot.setWorld(new PlayerSelect());
+                    break;
                 case "BackMode":
                     Greenfoot.setWorld(new Mode());
                     break;
-                case "AgainDouble":
-                    Greenfoot.setWorld(new PlayerSelect());
             }
         }
     }    

@@ -10,6 +10,7 @@ public class Bomb extends Actor
 {
     static int speed = 1;
     int side;
+    static int score = 1000; 
     SimpleTimer timer = new SimpleTimer();
     public Bomb(int level, int side) {
         this.side = side;
@@ -44,6 +45,7 @@ public class Bomb extends Actor
         }
     }
     public static void level(int level) {
-        speed = level % 3 == 0 ? speed + 1: speed;
+        speed = (level/3)*1+1;
+        score = (level/3)*1000+1000;
     }
 }

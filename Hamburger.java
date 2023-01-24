@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Hamburger extends Actor
 {
-    static int score;
+    static int score = 1000;
     SimpleTimer timer = new SimpleTimer();
     public Hamburger() {
         timer.mark();
@@ -24,10 +24,6 @@ public class Hamburger extends Actor
         }
     }
     public void level(int level) {
-        score += 500;
-    }
-    
-    public int getScore() {
-        return score;
+        score = (level/3)*500 + 1000;
     }
 }

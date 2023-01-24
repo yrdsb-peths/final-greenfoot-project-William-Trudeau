@@ -36,6 +36,6 @@ public class Fireball extends Actor
         }
     }
     public static void level(int level) {
-        speed = level % 5 == 0 ? speed + 1: speed;
+        speed = (level/5)*1+1;
     }
 }
