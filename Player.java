@@ -15,8 +15,10 @@ public class Player extends Actor
     String skill;
     String skin;
     boolean isUse = false;
+    boolean isCD = false;
     boolean sheild = false;
     boolean firstTime = true;
+    boolean death = false;
     SimpleTimer cd = new SimpleTimer();
     SimpleTimer timer = new SimpleTimer();
     public Player(String skin, String skill, int player) {
@@ -41,24 +43,28 @@ public class Player extends Actor
     public void touch() {
         if(isTouching(Fireball.class))
         {
-            if (getWorld() instanceof Solo) {
+            if (getWorld() instanceof Solo && sheild == false) {
                 ((Solo)getWorld()).gameOver();
+                getWorld().removeObject(this);
             }
-            else if (getWorld() instanceof Double) {
+            else if (getWorld() instanceof Double && sheild == false) {
+                this.death = true;
                 ((Double)getWorld()).gameOver();
+                getWorld().removeObject(this);
             }
-            getWorld().removeObject(this);
             return;
         }
         if(isTouching(Arrow.class))
         {
-            if (getWorld() instanceof Solo) {
+            if (getWorld() instanceof Solo && sheild == false) {
                 ((Solo)getWorld()).gameOver();
+                getWorld().removeObject(this);
             }
-            else if (getWorld() instanceof Double) {
+            else if (getWorld() instanceof Double && sheild == false) {
+                this.death = true;
                 ((Double)getWorld()).gameOver();
+                getWorld().removeObject(this);
             }
-            getWorld().removeObject(this);
             return;
         }
         if(isTouching(Bomb.class))
@@ -108,7 +114,7 @@ public class Player extends Actor
             else if (Greenfoot.isKeyDown("right")) {
                 setLocation(getX()+(3*speed),getY());
             }
-            else if (Greenfoot.isKeyDown("f")) {
+            else if (Greenfoot.isKeyDown("l")) {
                 skill();
             }
         }
@@ -116,37 +122,26 @@ public class Player extends Actor
     private void skill() {
         switch (this.skill) {
             case "Sheild":
-                if (cd.millisElapsed() > 8000 && !isUse) {
-                    sheild = true;
-                    timer.mark();
-                    GreenfootImage sheildImage = new GreenfootImage("sheild.png");
-                    sheildImage.scale(72, 72);
-                    this.setImage(sheildImage);
-                }
-                else if (firstTime) {
+                if ((cd.millisElapsed() > 8000 && !isUse) || firstTime) {
                     sheild = true;
                     timer.mark();
                     isUse = true;
+                    firstTime = false;
                     GreenfootImage sheildImage = new GreenfootImage("sheild.png");
                     sheildImage.scale(72, 72);
                     this.setImage(sheildImage);
+                    isCD = false;
                 }
                 break;
             case "Speed":
-                if (cd.millisElapsed() > 6000 && !isUse) {
+                if ((cd.millisElapsed() > 6000 && !isUse) || firstTime) {
                     speed = 3;
                     timer.mark();
                     isUse = true;
+                    isCD = false;
+                    firstTime = false;
                     GreenfootImage speedImage = new GreenfootImage("speed.png");
                     speedImage.scale(100, 100);
-                    this.setImage(speedImage);
-                }
-                else if (firstTime) {
-                    speed = 3;
-                    timer.mark();
-                    isUse = true;
-                    GreenfootImage speedImage = new GreenfootImage("speed.png");
-                    speedImage.scale(80, 80);
                     this.setImage(speedImage);
                 }
                 break;
@@ -159,6 +154,7 @@ public class Player extends Actor
                     sheild = false;
                     cd.mark();
                     isUse = false;
+                    isCD = true;
                     doSkin();
                 }
                 break;
@@ -167,10 +163,17 @@ public class Player extends Actor
                     speed = 1;
                     cd.mark();
                     isUse = false;
+                    isCD = true;
                     doSkin();
                 }
                 break;
-            }    
+            }   
+        if ((cd.millisElapsed() > 6000 && !isUse) || firstTime) {
+            isCD = false;
+        }
+        else {
+            isCD = true;
+        }
     }
     private void doSkin() {
         if (this.player == 1) {

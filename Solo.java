@@ -11,7 +11,7 @@ public class Solo extends World
     int level = 1;
     Player player = new Player(Shop.SKIN, Shop.SKILL, 1);
     Label showLevel = new Label("Level: "+ level, 36  );
-    Label cd = new Label("CD:", 20 );
+    Label cd = new Label("CD:", 35 );
     Label showScore = new Label("Score: " + player.score, 35);
     Label gameOver = new Label("GAMEOVER", 100);
     boolean isGameOver = false;
@@ -34,6 +34,7 @@ public class Solo extends World
         addObject(player, 400, 225);
         addObject(showScore, 400, 20);
         addObject(showLevel, 63, 20);
+        addObject(cd,400, 520);
         timer.mark();
         timerFireball.mark();
         timerArrow.mark();
@@ -43,7 +44,7 @@ public class Solo extends World
     }
     public void act() {
         if (!isGameOver) {
-            if (timerFireball.millisElapsed() > 5000-(level*10)) {
+            if (timerFireball.millisElapsed() > 5000-(level*50)) {
                 createFireball();
                 timerFireball.mark();
             }
@@ -63,9 +64,21 @@ public class Solo extends World
                 createHamburger();
                 timerHamburger.mark();
             }
+            updateCD();
             timeScore();
             levelUp();
         }    
+    }
+    public void updateCD() {
+        if (!player.isUse && player.isCD) {
+            cd.setValue("CD: Cooldown");
+        }
+        else if (!player.isUse) {
+            cd.setValue("CD: Ready");
+        }
+        else if (player.isUse) {
+            cd.setValue("CD: Using");
+        }
     }
     public void timeScore() {
         if (timer.millisElapsed() > 10) {
@@ -157,7 +170,7 @@ public class Solo extends World
     }
     public void gameOver() {
         isGameOver = true;
-        back.setImage("back.png");
+        back.setImage("back.png"); 
         again.setImage("again.png");
         addObject(gameOver, 400, 220);
         addObject(back, 300, 320);
