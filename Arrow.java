@@ -21,7 +21,7 @@ public class Arrow extends Actor
     {
         int x = getX();
         int y = getY();
-        if (timer.millisElapsed() > 10) {
+        if (timer.millisElapsed() > 8) {
             setLocation(x, y+speed);
             timer.mark();
         }    

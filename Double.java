@@ -15,10 +15,11 @@ public class Double extends World
     Label showLevel = new Label("Level: "+ level, 36  );
     Label cd = new Label("CD: ", 35 );
     Label cd2 = new Label("CD: ", 35);
-    Label showScore = new Label("Score: " + gameScore, 35);
-    Label showScore1 = new Label("Score: " + player.score, 20);
-    Label showScore2 = new Label("Score: " + player2.score, 20);
+    Label showScore = new Label("GameScore: " + gameScore, 35);
+    Label showScore1 = new Label("Score: " + player.score, 25);
+    Label showScore2 = new Label("Score: " + player2.score, 25);
     Label gameOver = new Label("Winner - ", 100);
+    Label money = new Label("$ "+gameScore/10,35);
     boolean isGameOver = false;
     SimpleTimer timerFireball = new SimpleTimer();
     SimpleTimer timerArrow = new SimpleTimer();
@@ -28,6 +29,7 @@ public class Double extends World
     SimpleTimer timer = new SimpleTimer();
     Button again = new Button("AgainDouble");
     Button back = new Button("BackMode");
+    GreenfootSound background = new GreenfootSound("game.mp3");
     /**
      * Constructor for objects of class Game.
      * 
@@ -39,25 +41,28 @@ public class Double extends World
         addObject(player, 300, 225);
         addObject(player2, 500, 225);
         addObject(showScore, 400, 20);
-        addObject(showScore1, 50, 520);
-        addObject(showScore2, 750, 520);
+        addObject(showScore1, 60, 522);
+        addObject(showScore2, 740, 522);
         addObject(showLevel, 63, 20);
-        addObject(cd, 200, 520);
-        addObject(cd2, 600, 520);
+        addObject(cd, 220, 520);
+        addObject(cd2, 580, 520);
+        addObject(money, 720, 20);
         timer.mark();
         timerFireball.mark();
         timerArrow.mark();
         timerBomb.mark();
         timerBanana.mark();
         timerHamburger.mark();
+        background.setVolume(8);
+        background.playLoop();
     }
     public void act() {
         if (!isGameOver) {
-            if (timerFireball.millisElapsed() > 5000-(level*50)) {
+            if (timerFireball.millisElapsed() > 5000-(level*100)) {
                 createFireball();
                 timerFireball.mark();
             }
-            if (timerArrow.millisElapsed() > 6500) {
+            if (timerArrow.millisElapsed() > 6500-(level*100)) {
                 createArrow();
                 timerArrow.mark();
             }
@@ -69,13 +74,14 @@ public class Double extends World
                 createBanana();
                 timerBanana.mark();
             }
-            if (timerHamburger.millisElapsed() > 8000) {
+            if (timerHamburger.millisElapsed() > 8000-(level*100)) {
                 createHamburger();
                 timerHamburger.mark();
             }
             updateCD();
             timeScore();
             levelUp();
+            money.setValue("$ "+gameScore/15);
         }    
     }
     public void updateCD() {
@@ -102,17 +108,21 @@ public class Double extends World
     }
     public void timeScore() {
         if (timer.millisElapsed() > 10) {
-            player.score += 6;
-            player2.score += 6;
+            if (!player.death) {
+                player.score += 6;
+            }    
+            if (!player2.death) {
+                player2.score += 6;
+            }
             gameScore = (player.score+player2.score)/2;
-            showScore.setValue("Score: " + gameScore);
+            showScore.setValue("GameScore: " + gameScore);
             showScore1.setValue("Score: " + player.score);
             showScore2.setValue("Score: " + player2.score);
             timer.mark();
         }
     }
     public void createFireball() {
-        int amount = Greenfoot.getRandomNumber(4);
+        int amount = Greenfoot.getRandomNumber(4+(level/8));
         for (int i = amount+1; i > 0; i--) {
             int side = Greenfoot.getRandomNumber(2);
             Fireball fireball = new Fireball(level, side);
@@ -130,7 +140,7 @@ public class Double extends World
         }
     }
     public void createArrow() {
-        int amount = Greenfoot.getRandomNumber(3+(level/10));
+        int amount = Greenfoot.getRandomNumber(3+(level/5));
         for (int i = amount+1; i > 0; i--) {
             Arrow arrow = new Arrow(level);
             int x = Greenfoot.getRandomNumber(800);
@@ -141,7 +151,7 @@ public class Double extends World
         }    
     }
     public void createBomb() {
-        int amount = Greenfoot.getRandomNumber(4);
+        int amount = Greenfoot.getRandomNumber(4+(level/10));
         for (int i = amount+1; i > 0; i--) {
             int side = Greenfoot.getRandomNumber(4);
             Bomb bomb = new Bomb(level, side);
@@ -165,7 +175,7 @@ public class Double extends World
         }
     }
     public void createBanana() {
-        int amount = Greenfoot.getRandomNumber(4);
+        int amount = Greenfoot.getRandomNumber(4+(level/10));
         for (int i = amount+1; i > 0; i--) {
             Banana banana = new Banana();
             int x = Greenfoot.getRandomNumber(800);
@@ -209,6 +219,7 @@ public class Double extends World
             }
             addObject(back, 300, 320);
             addObject(again, 500, 320);
+            Shop.MONEY += gameScore/15;
         }    
     }
 }

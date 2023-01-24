@@ -21,6 +21,8 @@ public class Player extends Actor
     boolean death = false;
     SimpleTimer cd = new SimpleTimer();
     SimpleTimer timer = new SimpleTimer();
+    GreenfootSound damage = new GreenfootSound("damage.wav");
+    GreenfootSound reward = new GreenfootSound("reward.wav");
     public Player(String skin, String skill, int player) {
         this.skill = skill;
         this.skin = skin;
@@ -43,6 +45,7 @@ public class Player extends Actor
     public void touch() {
         if(isTouching(Fireball.class))
         {
+            damage.play();
             if (getWorld() instanceof Solo && sheild == false) {
                 ((Solo)getWorld()).gameOver();
                 getWorld().removeObject(this);
@@ -56,6 +59,7 @@ public class Player extends Actor
         }
         if(isTouching(Arrow.class))
         {
+            damage.play();
             if (getWorld() instanceof Solo && sheild == false) {
                 ((Solo)getWorld()).gameOver();
                 getWorld().removeObject(this);
@@ -69,16 +73,19 @@ public class Player extends Actor
         }
         if(isTouching(Bomb.class))
         {
+            damage.play();
             removeTouching(Bomb.class);
             this.score -= Bomb.score;
         }
         if(isTouching(Banana.class))
         {
+            reward.play();
             removeTouching(Banana.class);
             this.score += Banana.score*multi;
         }
         if(isTouching(Hamburger.class))
         {
+            reward.play();
             removeTouching(Hamburger.class);
             this.score += Hamburger.score*multi;
         }

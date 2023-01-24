@@ -11,6 +11,7 @@ public class Button extends Actor
     private String name;
     GifImage logoImage = new GifImage("logo.gif");
     Shop shop;
+    GreenfootSound clickSound = new GreenfootSound("click.wav");
     public Button(String name) {
         this.name = name;
     }
@@ -48,8 +49,10 @@ public class Button extends Actor
             if (getWorld() instanceof Shop) {
                 shop = (Shop) getWorld();
             }    
+            clickSound.play();
             switch (this.name) {
                 case "StartButton":
+                    ((Menu)getWorld()).background.stop();
                     Greenfoot.setWorld(new Mode());
                     break;
                 case "GuideButton":
@@ -62,8 +65,16 @@ public class Button extends Actor
                     Greenfoot.setWorld(new Menu());
                     break;
                 case "Solo":
+                    ((Mode)getWorld()).background.stop();
                     Greenfoot.setWorld(new Solo());
                     break;
+                case "Double":
+                    ((Mode)getWorld()).background.stop();
+                    Greenfoot.setWorld(new Double());
+                case "Crazy":
+                    ((Mode)getWorld()).addObject(((Mode)getWorld()).notReady, 400, 250);
+                    Greenfoot.delay(50);
+                    ((Mode)getWorld()).removeObject(((Mode)getWorld()).notReady);
                 case "Default":
                     if (!Shop.SKIN.equals("Default")) {
                         skinStatus(shop);
@@ -144,12 +155,20 @@ public class Button extends Actor
                     Shop.SKILL = "Score";
                     break;
                 case "Again":
+                    ((Solo)getWorld()).background.stop();
                     Greenfoot.setWorld(new Solo());
                     break;
                 case "AgainDouble":
+                    ((Double)getWorld()).background.stop();
                     Greenfoot.setWorld(new Double());
                     break;
                 case "BackMode":
+                    if (getWorld() instanceof Solo) {
+                        ((Solo)getWorld()).background.stop();
+                    }
+                    else {
+                        ((Double)getWorld()).background.stop();
+                    }
                     Greenfoot.setWorld(new Mode());
                     break;
             }

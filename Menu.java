@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Menu extends World
 {
+    GreenfootSound background = new GreenfootSound("menu.mp3");
     /**
      * Constructor for objects of class Menu.
      * 
@@ -28,5 +29,12 @@ public class Menu extends World
         Button shop = new Button("ShopButton");
         addObject(shop, 400, 425);
         shop.setImage("button_shop.png");
+    }
+    public void started() {
+        background.setVolume(8);
+        background.playLoop();
+    }
+    public void stopped() {
+        background.stop();
     }
 }

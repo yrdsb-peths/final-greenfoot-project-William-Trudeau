@@ -8,11 +8,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Mode extends World
 {
+    GreenfootSound background = new GreenfootSound("menu.mp3");
     Button logo = new Button("Logo");
     Button back = new Button("Back");
     Button infiniteSolo = new Button("Solo");
     Button infiniteDouble = new Button("Double");
     Button infiniteCrazy = new Button("Crazy");
+    Label notReady = new Label("Open in 3.0.0 Update!", 60);
     /**
      * Constructor for objects of class Levels.
      * 
@@ -30,5 +32,7 @@ public class Mode extends World
         infiniteDouble.setImage("button_infinite-double.png");
         addObject(infiniteCrazy, 400, 450);
         infiniteCrazy.setImage("button_infinite-crazy.png");
+        background.setVolume(8);
+        background.playLoop();
     }
 }

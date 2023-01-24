@@ -14,6 +14,7 @@ public class Solo extends World
     Label cd = new Label("CD:", 35 );
     Label showScore = new Label("Score: " + player.score, 35);
     Label gameOver = new Label("GAMEOVER", 100);
+    Label money = new Label("$ "+player.score/10,35);
     boolean isGameOver = false;
     SimpleTimer timerFireball = new SimpleTimer();
     SimpleTimer timerArrow = new SimpleTimer();
@@ -23,6 +24,7 @@ public class Solo extends World
     SimpleTimer timer = new SimpleTimer();
     Button again = new Button("Again");
     Button back = new Button("BackMode");
+    GreenfootSound background = new GreenfootSound("game.mp3");
     /**
      * Constructor for objects of class Game.
      * 
@@ -34,21 +36,24 @@ public class Solo extends World
         addObject(player, 400, 225);
         addObject(showScore, 400, 20);
         addObject(showLevel, 63, 20);
-        addObject(cd,400, 520);
+        addObject(cd, 400, 520);
+        addObject(money, 720, 20);
         timer.mark();
         timerFireball.mark();
         timerArrow.mark();
         timerBomb.mark();
         timerBanana.mark();
         timerHamburger.mark();
+        background.setVolume(8);
+        background.playLoop();
     }
     public void act() {
         if (!isGameOver) {
-            if (timerFireball.millisElapsed() > 5000-(level*50)) {
+            if (timerFireball.millisElapsed() > 5000-(level*100)) {
                 createFireball();
                 timerFireball.mark();
             }
-            if (timerArrow.millisElapsed() > 6500) {
+            if (timerArrow.millisElapsed() > 6500-(level*100)) {
                 createArrow();
                 timerArrow.mark();
             }
@@ -60,13 +65,14 @@ public class Solo extends World
                 createBanana();
                 timerBanana.mark();
             }
-            if (timerHamburger.millisElapsed() > 8000) {
+            if (timerHamburger.millisElapsed() > 8000-(level*100)) {
                 createHamburger();
                 timerHamburger.mark();
             }
             updateCD();
             timeScore();
             levelUp();
+            money.setValue("$ "+player.score/15);
         }    
     }
     public void updateCD() {
@@ -88,7 +94,7 @@ public class Solo extends World
         }
     }
     public void createFireball() {
-        int amount = Greenfoot.getRandomNumber(4);
+        int amount = Greenfoot.getRandomNumber(4+(level/8));
         for (int i = amount+1; i > 0; i--) {
             int side = Greenfoot.getRandomNumber(2);
             Fireball fireball = new Fireball(level, side);
@@ -106,7 +112,7 @@ public class Solo extends World
         }
     }
     public void createArrow() {
-        int amount = Greenfoot.getRandomNumber(3+(level/10));
+        int amount = Greenfoot.getRandomNumber(3+(level/5));
         for (int i = amount+1; i > 0; i--) {
             Arrow arrow = new Arrow(level);
             int x = Greenfoot.getRandomNumber(800);
@@ -117,7 +123,7 @@ public class Solo extends World
         }    
     }
     public void createBomb() {
-        int amount = Greenfoot.getRandomNumber(4);
+        int amount = Greenfoot.getRandomNumber(4+(level/10));
         for (int i = amount+1; i > 0; i--) {
             int side = Greenfoot.getRandomNumber(4);
             Bomb bomb = new Bomb(level, side);
@@ -141,7 +147,7 @@ public class Solo extends World
         }
     }
     public void createBanana() {
-        int amount = Greenfoot.getRandomNumber(4);
+        int amount = Greenfoot.getRandomNumber(4+(level/10));
         for (int i = amount+1; i > 0; i--) {
             Banana banana = new Banana();
             int x = Greenfoot.getRandomNumber(800);
@@ -175,5 +181,6 @@ public class Solo extends World
         addObject(gameOver, 400, 220);
         addObject(back, 300, 320);
         addObject(again, 500, 320);
+        Shop.MONEY += player.score/15;
     }
 }

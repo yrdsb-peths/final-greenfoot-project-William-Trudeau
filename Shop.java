@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Shop extends World
 {
-    static int MONEY = 10000;
+    static int MONEY = 200;
     static String SKIN = "Default";
     static String SKILL = "Speed";
     static boolean[] UNLOCK = {true, false, false, false};
