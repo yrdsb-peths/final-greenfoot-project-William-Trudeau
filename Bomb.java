@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Bomb here.
+ * Bomb
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * William Wang
+ * 1.0.0
  */
 public class Bomb extends Actor
 {

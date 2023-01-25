@@ -44,18 +44,50 @@ public class Button extends Actor
     }
     public void buttonMoved() {
         if (Greenfoot.mouseMoved(this)&& !this.name.equals("Logo") && !this.name.equals("null")) {
+            if (getWorld() instanceof Guide) {
+                guide = (Guide)getWorld();
+            }
             switch (this.name) {
                 case "1":
-                    getWorld().addObject(((Guide)getWorld()).level1, 400, 250);
+                    guideClean(guide);
+                    guide.addObject(guide.g1, 400, 430);
+                    break;
                 case "2":
+                    guideClean(guide);
+                    guide.addObject(guide.g2, 400, 430);
+                    break;
                 case "3":
+                    guideClean(guide);
+                    guide.addObject(guide.g3, 400, 430);
+                    break;
                 case "4":
+                    guideClean(guide);
+                    guide.addObject(guide.g4, 400, 430);
+                    break;
                 case "5":
+                    guideClean(guide);
+                    guide.addObject(guide.g5, 400, 430);
+                    break;
                 case "6":
+                    guideClean(guide);
+                    guide.addObject(guide.g6, 400, 430);
+                    break;
                 case "7":
+                    guideClean(guide);
+                    guide.addObject(guide.g7, 400, 430);
+                    break;
                 case "8":
+                    guideClean(guide);
+                    guide.addObject(guide.g8, 400, 430);
+                    break;
                 case "9":
+                    guideClean(guide);
+                    guide.addObject(guide.g9, 400, 430);
+                    break;
                 case "10":
+                    guideClean(guide);
+                    guide.addObject(guide.g10, 400, 430);
+                    break;
             }
         }
     }
@@ -212,7 +244,16 @@ public class Button extends Actor
         shop.scoreLabel.setValue("Available");
     }
     public void guideClean(Guide guide){
-        
+        guide.removeObject(guide.g1);
+        guide.removeObject(guide.g2);
+        guide.removeObject(guide.g3);
+        guide.removeObject(guide.g4);
+        guide.removeObject(guide.g5);
+        guide.removeObject(guide.g6);
+        guide.removeObject(guide.g7);
+        guide.removeObject(guide.g8);
+        guide.removeObject(guide.g9);
+        guide.removeObject(guide.g10);
     }
     public String getName() {
         return this.name;

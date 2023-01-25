@@ -1,22 +1,25 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Player here.
+ * Control all the player behavior. Atrributes, skill, skin, control, touch.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @William 
+ * @1.0.0
  */
 public class Player extends Actor
 {
     int speed = 1;
     int score = 0;
+    //score skill will have 2x multiplier
     int multi = 1;
     int player = 1;
     String skill;
     String skin;
     boolean isUse = false;
     boolean isCD = false;
+    //is sheild on
     boolean sheild = false;
+    //is first time using skill
     boolean firstTime = true;
     boolean death = false;
     SimpleTimer cd = new SimpleTimer();
@@ -42,6 +45,9 @@ public class Player extends Actor
         check();
         touch();
     }
+    /**
+     * Detected if player touch any thing, and run the action if touch.
+     */
     public void touch() {
         if(isTouching(Fireball.class))
         {
@@ -90,6 +96,9 @@ public class Player extends Actor
             this.score += Hamburger.score*multi;
         }
     }
+    /**
+     * Player movement and skill cast with different key.
+     */
     private void control() {
         if (this.player == 1) {
             if(Greenfoot.isKeyDown("w")) {
@@ -126,6 +135,9 @@ public class Player extends Actor
             }
         }
     }
+    /**
+     * Skill Behaviours
+     */
     private void skill() {
         switch (this.skill) {
             case "Sheild":
@@ -154,6 +166,9 @@ public class Player extends Actor
                 break;
         }
     }
+    /**
+     * Check how long the skill been used and stop if times up.
+     */
     private void check() {
         switch (this.skill) {
             case "Sheild":
@@ -182,6 +197,9 @@ public class Player extends Actor
             isCD = true;
         }
     }
+    /**
+     * Change player skin to what they selected.
+     */
     private void doSkin() {
         if (this.player == 1) {
             switch (this.skin) {

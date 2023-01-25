@@ -31,7 +31,7 @@ public class Menu extends World
         shop.setImage("button_shop.png");
     }
     public void started() {
-        background.setVolume(8);
+        background.setVolume(35);
         background.playLoop();
     }
     public void stopped() {

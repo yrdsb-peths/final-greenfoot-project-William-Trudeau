@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Level1 here.
+ * Mode Menu to selected different gamemode!
  * 
  * @author William Wang
  * @version 1.0.0
@@ -32,7 +32,7 @@ public class Mode extends World
         infiniteDouble.setImage("button_infinite-double.png");
         addObject(infiniteCrazy, 400, 450);
         infiniteCrazy.setImage("button_infinite-crazy.png");
-        background.setVolume(8);
+        background.setVolume(35);
         background.playLoop();
     }
 }

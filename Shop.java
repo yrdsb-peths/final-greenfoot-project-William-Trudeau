@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Shop here.
+ * Shop for purchase skin and selected skin and skill.
  * 
  * @author William Wang
  * @version 1.0.0
@@ -10,7 +10,7 @@ public class Shop extends World
 {
     static int MONEY = 200;
     static String SKIN = "Default";
-    static String SKILL = "Speed";
+    static String SKILL = "Sheild";
     static boolean[] UNLOCK = {true, false, false, false};
     
     Label ppl1Label = new Label("Selected", 20);
@@ -56,6 +56,9 @@ public class Shop extends World
         useSkill.setValue("Skill: "+SKILL);
         money.setValue("$"+MONEY);
     }
+    /**
+     * set UI
+     */
     private void setMenu() {
         addObject(back, 68, 28);
         back.setImage("button_back.png");  
@@ -64,6 +67,9 @@ public class Shop extends World
         addObject(shop, 400, 70);
         shop.setImage("shop.png");
     }
+    /**
+     * Add all the button & images in to Shop
+     */
     private void setShop() {
         addObject(ppl1, 100, 220);
         ppl1.setImage("ppl1.png"); 
@@ -89,6 +95,9 @@ public class Shop extends World
         scoreImage.scale(80, 80);
         score.setImage(scoreImage);
     }
+    /**
+     * Add all the Labels in to the Shop
+     */
     private void setStatus() {
         addObject(ppl1Label, 100, 275); 
         addObject(baby1Label, 300, 275);

@@ -1,29 +1,33 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Game here.
+ * Solo Gamemode World
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * William Wang
+ * 1.0.0
  */
 public class Solo extends World
 {
     int level = 1;
     Player player = new Player(Shop.SKIN, Shop.SKILL, 1);
+    //UI
     Label showLevel = new Label("Level: "+ level, 36  );
     Label cd = new Label("CD:", 35 );
     Label showScore = new Label("Score: " + player.score, 35);
-    Label gameOver = new Label("GAMEOVER", 100);
     Label money = new Label("$ "+player.score/10,35);
-    boolean isGameOver = false;
+    //Timer for spawning the Actors
     SimpleTimer timerFireball = new SimpleTimer();
     SimpleTimer timerArrow = new SimpleTimer();
     SimpleTimer timerBomb = new SimpleTimer();
     SimpleTimer timerBanana = new SimpleTimer();
     SimpleTimer timerHamburger = new SimpleTimer();
     SimpleTimer timer = new SimpleTimer();
+    //GameOver Variable
+    boolean isGameOver = false;
     Button again = new Button("Again");
     Button back = new Button("BackMode");
+    Label gameOver = new Label("GAMEOVER", 100);
+    //Game Music
     GreenfootSound background = new GreenfootSound("game.mp3");
     /**
      * Constructor for objects of class Game.
@@ -44,7 +48,7 @@ public class Solo extends World
         timerBomb.mark();
         timerBanana.mark();
         timerHamburger.mark();
-        background.setVolume(8);
+        background.setVolume(30);
         background.playLoop();
     }
     public void act() {
@@ -75,6 +79,9 @@ public class Solo extends World
             money.setValue("$ "+player.score/15);
         }    
     }
+    /**
+     * Update the CD Label
+     */
     public void updateCD() {
         if (!player.isUse && player.isCD) {
             cd.setValue("CD: Cooldown");
@@ -86,6 +93,9 @@ public class Solo extends World
             cd.setValue("CD: Using");
         }
     }
+    /**
+     * The score earn by time and update score Label
+     */
     public void timeScore() {
         if (timer.millisElapsed() > 10) {
             player.score += 6;
@@ -167,6 +177,9 @@ public class Solo extends World
         hamburger.setImage(image);
         addObject(hamburger, x, y);  
     }
+    /**
+     * Update the level label and past the level to actor class
+     */
     public void levelUp() {
         level = player.score/1500+1;
         showLevel.setValue("Level: "+level);
@@ -174,6 +187,9 @@ public class Solo extends World
         Arrow.level(level);
         Bomb.level(level);
     }
+    /**
+     * GameOver Screen
+     */
     public void gameOver() {
         isGameOver = true;
         back.setImage("back.png"); 

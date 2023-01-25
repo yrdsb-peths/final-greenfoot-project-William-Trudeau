@@ -1,34 +1,39 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Double here.
+ * Double GameMode World
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * William Wang
+ * 1.0.0
  */
 public class Double extends World
 {
     int level = 1;
     int gameScore = 0;
+    //Players
     Player player = new Player("Default", "Sheild", 1);
     Player player2 = new Player("Default", "Speed", 2);
+    //UI
     Label showLevel = new Label("Level: "+ level, 36  );
     Label cd = new Label("CD: ", 35 );
     Label cd2 = new Label("CD: ", 35);
     Label showScore = new Label("GameScore: " + gameScore, 35);
     Label showScore1 = new Label("Score: " + player.score, 25);
     Label showScore2 = new Label("Score: " + player2.score, 25);
-    Label gameOver = new Label("Winner - ", 100);
     Label money = new Label("$ "+gameScore/10,35);
-    boolean isGameOver = false;
+    //Timer for spawning the Actors
     SimpleTimer timerFireball = new SimpleTimer();
     SimpleTimer timerArrow = new SimpleTimer();
     SimpleTimer timerBomb = new SimpleTimer();
     SimpleTimer timerBanana = new SimpleTimer();
     SimpleTimer timerHamburger = new SimpleTimer();
     SimpleTimer timer = new SimpleTimer();
+    //GameOver Variable
+    boolean isGameOver = false;
     Button again = new Button("AgainDouble");
     Button back = new Button("BackMode");
+    Label gameOver = new Label("Winner - ", 100);
+    //Game Music
     GreenfootSound background = new GreenfootSound("game.mp3");
     /**
      * Constructor for objects of class Game.
@@ -53,7 +58,7 @@ public class Double extends World
         timerBomb.mark();
         timerBanana.mark();
         timerHamburger.mark();
-        background.setVolume(8);
+        background.setVolume(30);
         background.playLoop();
     }
     public void act() {
@@ -84,6 +89,9 @@ public class Double extends World
             money.setValue("$ "+gameScore/15);
         }    
     }
+    /**
+     * Update the CD Label
+     */
     public void updateCD() {
         //Player 1
         if (!player.isUse && player.isCD) {
@@ -106,6 +114,9 @@ public class Double extends World
             cd2.setValue("CD: Using");
         }
     }
+    /**
+     * The score earn by time and update player score and game score
+     */
     public void timeScore() {
         if (timer.millisElapsed() > 10) {
             if (!player.death) {
@@ -195,6 +206,9 @@ public class Double extends World
         hamburger.setImage(image);
         addObject(hamburger, x, y);  
     }
+    /**
+     * Update the level label and past the level to actor class
+     */
     public void levelUp() {
         level = gameScore/1500+1;
         showLevel.setValue("Level: "+level);
@@ -202,6 +216,9 @@ public class Double extends World
         Arrow.level(level);
         Bomb.level(level);
     }
+    /**
+     * GameOver Screen
+     */
     public void gameOver() {
         if (player.death && player2.death){
             isGameOver = true;

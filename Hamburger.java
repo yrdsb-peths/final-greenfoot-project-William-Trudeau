@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Hamburger here.
+ * Hamburger
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * William Wang
+ * 1.0.0
  */
 public class Hamburger extends Actor
 {
